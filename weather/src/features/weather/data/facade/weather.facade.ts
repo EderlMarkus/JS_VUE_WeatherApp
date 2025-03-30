@@ -3,56 +3,35 @@ import { OpenWeatherMapService } from '../services/openWeatherMap.service';
 
 export class WeatherFacade {
   private readonly openWeatherMapService = new OpenWeatherMapService();
-  private readonly _loading = ref(false);
-  private readonly _error = ref(null);
-  private readonly _cities = [
-    'Mondsee',
-    'Wien',
-    'Berlin',
-    'Paris',
-    'New York',
-    'Tokio',
-  ];
-  private readonly _selectedCity = ref('');
-  private readonly _weatherData = ref(null);
-
-  public get loading() {
-    return this._loading;
-  }
-
-  public get error() {
-    return this._error;
-  }
-
-  public get selectedCity() {
-    return this._selectedCity;
-  }
-
-  public get cities() {
-    return this._cities;
-  }
-
-  public get weatherData() {
-    return this._weatherData;
-  }
-
-  public get temperature() {
-    return computed(() =>
-      this._weatherData.value
-        ? Math.round(this._weatherData.value.main.temp)
-        : ''
-    );
-  }
+  public readonly data = ref({
+    loading: false,
+    error: null,
+    cities: ['Mondsee', 'Wien', 'Berlin', 'Paris', 'New York', 'Tokio'],
+    selectedCity: '',
+    weatherData: null,
+  });
 
   public queryWeatherData = async (cityName) => {
+    this.updateData({
+      weatherData: null,
+      error: null,
+      loading: true,
+    });
     try {
       const response =
         await this.openWeatherMapService.getWeatherDataByCityName(cityName);
-      this._weatherData.value = await response.json();
+      const weatherData = await response.json();
+      weatherData.temperature = Math.round(weatherData.main.temp);
+      this.updateData({ weatherData });
     } catch (err) {
-      this._error.value = err.message;
+      const error = err.message;
+      this.updateData({ error });
     } finally {
-      this._loading.value = false;
+      this.updateData({ loading: false });
     }
   };
+
+  private updateData(newData) {
+    this.data.value = { ...this.data.value, ...newData };
+  }
 }

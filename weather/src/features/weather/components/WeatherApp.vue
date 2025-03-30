@@ -4,24 +4,24 @@
 
     <div class="selection">
       <label for="city">Stadt auswählen:</label>
-      <select v-model="selectedCity" @change="fetchWeather">
+      <select v-model="data.selectedCity" @change="fetchWeather">
         <option disabled value="">Bitte Stadt wählen</option>
-        <option v-for="city in weatherFacade.cities" :key="city" :value="city">
+        <option v-for="city in data.cities" :key="city" :value="city">
           {{ city }}
         </option>
       </select>
     </div>
-    <div v-if="weatherData" class="weather-info">
-      <h2>{{ selectedCity }}</h2>
-      <p><strong>Temperatur:</strong> {{ temperature }} °C</p>
+    <div v-if="data.weatherData" class="weather-info">
+      <h2>{{ data.selectedCity }}</h2>
+      <p><strong>Temperatur:</strong> {{ data.weatherData.temperature }} °C</p>
       <p>
         <strong>Beschreibung:</strong>
-        {{ weatherData?.weather[0]?.description }}
+        {{ data.weatherData?.weather[0]?.description }}
       </p>
     </div>
 
-    <div v-if="loading">Lade Wetterdaten...</div>
-    <div v-if="error">{{ error }}</div>
+    <div v-if="data.loading">Lade Wetterdaten...</div>
+    <div v-if="data.error">{{ data.error }}</div>
   </div>
 </template>
 
@@ -29,17 +29,12 @@
 import { WeatherFacade } from "../data/facade/weather.facade";
 
 const weatherFacade = new WeatherFacade();
-const loading = weatherFacade.loading;
-const selectedCity = weatherFacade.selectedCity;
-const weatherData = weatherFacade.weatherData;
-const error = weatherFacade.error;
+const data = weatherFacade.data;
 
 const fetchWeather = async () => {
-  if (!selectedCity.value) return;
-  weatherFacade.queryWeatherData(selectedCity.value);
+  if (!data?.value?.selectedCity) return;
+  weatherFacade.queryWeatherData(data.value.selectedCity);
 };
-
-const temperature = weatherFacade.temperature;
 </script>
 
 <style scoped>
