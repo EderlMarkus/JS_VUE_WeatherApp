@@ -1,8 +1,12 @@
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { OpenWeatherMapService } from '../services/openWeatherMap.service';
 
 export class WeatherFacade {
-  private readonly openWeatherMapService = new OpenWeatherMapService();
+  constructor(service?: OpenWeatherMapService) {
+    this.openWeatherMapService = service || new OpenWeatherMapService();
+  }
+
+  private readonly openWeatherMapService;
   public readonly data = ref({
     loading: false,
     error: null,
@@ -24,7 +28,7 @@ export class WeatherFacade {
       weatherData.temperature = Math.round(weatherData.main.temp);
       this.updateData({ weatherData });
     } catch (err) {
-      const error = err.message;
+      const error = 'Fehler beim Abrufen der Wetterdaten';
       this.updateData({ error });
     } finally {
       this.updateData({ loading: false });
