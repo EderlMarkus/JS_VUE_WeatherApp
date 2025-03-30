@@ -28,7 +28,7 @@
 <script setup>
 import { ref, computed } from "vue";
 
-const cities = ["Wien", "Berlin", "Paris", "New York", "Tokio"];
+const cities = ["Mondsee", "Wien", "Berlin", "Paris", "New York", "Tokio"];
 const selectedCity = ref("");
 const weatherData = ref(null);
 const loading = ref(false);
