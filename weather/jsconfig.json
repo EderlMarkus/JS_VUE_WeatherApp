@@ -2,7 +2,11 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "module": "esnext",
+    "target": "esnext",
+    "types": ["vite/client"],
+    "moduleResolution": "node"
   },
   "exclude": ["node_modules", "dist"]
 }

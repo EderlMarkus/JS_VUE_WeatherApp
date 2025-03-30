@@ -6,7 +6,7 @@
       <label for="city">Stadt auswählen:</label>
       <select v-model="selectedCity" @change="fetchWeather">
         <option disabled value="">Bitte Stadt wählen</option>
-        <option v-for="city in cities" :key="city" :value="city">
+        <option v-for="city in weatherFacade.cities" :key="city" :value="city">
           {{ city }}
         </option>
       </select>
@@ -26,40 +26,20 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { WeatherFacade } from "../data/facade/weather.facade";
 
-const cities = ["Mondsee", "Wien", "Berlin", "Paris", "New York", "Tokio"];
-const selectedCity = ref("");
-const weatherData = ref(null);
-const loading = ref(false);
-const error = ref(null);
-
-const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+const weatherFacade = new WeatherFacade();
+const loading = weatherFacade.loading;
+const selectedCity = weatherFacade.selectedCity;
+const weatherData = weatherFacade.weatherData;
+const error = weatherFacade.error;
 
 const fetchWeather = async () => {
   if (!selectedCity.value) return;
-
-  loading.value = true;
-  error.value = null;
-  weatherData.value = null;
-
-  try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity.value}&units=metric&lang=de&appid=${API_KEY}`
-    );
-    if (!response.ok) throw new Error("Fehler beim Abrufen der Wetterdaten");
-
-    weatherData.value = await response.json();
-  } catch (err) {
-    error.value = err.message;
-  } finally {
-    loading.value = false;
-  }
+  weatherFacade.queryWeatherData(selectedCity.value);
 };
 
-const temperature = computed(() =>
-  weatherData.value ? Math.round(weatherData.value.main.temp) : ""
-);
+const temperature = weatherFacade.temperature;
 </script>
 
 <style scoped>
