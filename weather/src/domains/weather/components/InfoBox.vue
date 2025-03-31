@@ -1,8 +1,9 @@
 <script setup>
 import { toRefs } from "vue";
 const props = defineProps({
-  data: Object,
+  weatherFacade: Object,
 });
+const data = props.weatherFacade.data;
 </script>
 
 <template>

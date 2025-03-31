@@ -10,6 +10,7 @@ export default defineConfig({
     exclude: ['e2e-tests', 'node_modules', 'dist', '**/playwright.config.ts'],
   },
   plugins: [vue(), vueDevTools()],
+  base: './',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

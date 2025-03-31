@@ -1,9 +1,9 @@
 <script setup>
-import WeatherApp from "./features/weather/components/WeatherApp.vue";
+import Weather from "./domains/weather/components/Index.vue";
 </script>
 
 <template>
   <main>
-    <WeatherApp />
+    <Weather />
   </main>
 </template>

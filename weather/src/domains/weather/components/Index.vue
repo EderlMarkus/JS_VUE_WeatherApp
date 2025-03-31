@@ -13,7 +13,7 @@ const data = weatherFacade.data;
     <h1>Wetter App</h1>
 
     <Selection :weatherFacade="weatherFacade" />
-    <InfoBox v-if="data.weatherData" :data="data" />
+    <InfoBox v-if="data.weatherData" :weatherFacade="weatherFacade" />
 
     <div v-if="data.loading" class="loading"><Loading /></div>
     <div v-if="data.error" class="error"><Error :message="data.error" /></div>
