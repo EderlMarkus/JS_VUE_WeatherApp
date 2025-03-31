@@ -6,7 +6,7 @@ Diese kleine Vue.js-App zeigt, wie ich meinen Software-Development-Prozess angeh
 
 <img src="./readme/assets/usecase.png" width="300px">
 
-### Stadt auswählen
+### UseCase 1 - Stadt auswählen
 
 Vorbedingung: Die App wurde erfolgreich geladen.
 
@@ -27,7 +27,7 @@ Vorbedingung: Die App wurde erfolgreich geladen.
 </tr>
 </table>
 
-### Wetterdaten anzeigen
+### UseCase 2 - Wetterdaten anzeigen
 
 Vorbedingung: Die App wurde erfolgreich geladen. Die gewünschte Stadt wurde erfolgreich ausgewählt.
 
@@ -65,3 +65,7 @@ _damit ich einen Überblick über die aktuelle Wettersituation habe_
 - Der User kann aus einer Liste verfügbarer Städte auswählen
 - Die aktuellen Wetterdaten zu einer ausgewählten Stadt wird angezeigt.
 - Wenn die Wetterdaten nicht geladen werden können, wird dem User mitgeteilt, dass die Daten nicht geladen werden konnten.
+
+## Demo
+
+https://ederlmarkus.github.io/JS_VUE_WeatherApp/
