@@ -1,6 +1,6 @@
 # Weather-App
 
-Eine kleine VueJS App die uns aktuelle Wetterdaten zu einer Liste von Städten liefert. Der User wählt die gewünschte Stadt und die aktuellen Wetterdaten werden in einer InfoBox angezeigt.
+Diese kleine Vue.js-App zeigt, wie ich meinen Software-Development-Prozess angehe. Sie liefert aktuelle Wetterdaten für eine Liste von Städten. Der Benutzer kann eine Stadt auswählen, und die entsprechenden Wetterinformationen werden in einer übersichtlichen InfoBox angezeigt. Dieses Projekt dient als Mini-Beispiel und veranschaulicht meine Herangehensweise an die Entwicklung funktionaler und benutzerfreundlicher Anwendungen.
 
 ## Use Case Diagramm
 
